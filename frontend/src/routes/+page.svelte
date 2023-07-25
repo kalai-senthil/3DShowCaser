@@ -1,4 +1,5 @@
 <script>
+	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
 <svelte:head>
@@ -6,6 +7,5 @@
 	<meta name="description" content="3D Show Caser" />
 </svelte:head>
 
-<section>
-	3D Show Caser
-</section>
+<Navbar />
+<section />
