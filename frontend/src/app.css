@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+	input {
+		@apply p-2 border-[.5px] bg-transparent focus:outline-none focus:border-gray-400 my-3 rounded-md bg-secondary focus:bg-transparent;
+	}
+}
 body {
 	@apply bg-primary text-white font-[poppins];
 }
 .gradient-spin {
 	background-size: 300% 300%;
-	animation: gradient-spin 10s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+	animation: gradient-spin 6s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
 	text-shadow: 1em 1em;
 }
 @keyframes gradient-spin {

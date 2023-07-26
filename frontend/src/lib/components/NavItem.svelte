@@ -4,7 +4,7 @@
 </script>
 
 <a href={route}>
-	<li class="bg-secondary text-white p-2 rounded-md shadow-md font-bold">
+	<li class="bg-secondary hover:underline text-white p-2 rounded-md shadow-md font-bold">
 		{name}
 	</li>
 </a>
