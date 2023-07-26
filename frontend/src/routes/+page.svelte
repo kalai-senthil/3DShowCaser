@@ -1,4 +1,5 @@
 <script>
+	import HomeHero from '$lib/components/HomeHero.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 </script>
 
@@ -8,4 +9,6 @@
 </svelte:head>
 
 <Navbar />
-<section />
+<section>
+	<HomeHero />
+</section>

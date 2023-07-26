@@ -4,8 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#fffcf2",
-        secondary: "#eb5e28",
+        primary: "#202124",
+        secondary: "#1B1C20",
+        gradientFrom: "#bd2a96",
+        gradientVia: "#EA2940",
+        gradientTo: "#DAA827",
       }
     },
   },

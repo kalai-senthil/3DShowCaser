@@ -1,4 +1,23 @@
-@import '@fontsource/fira-mono';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	@apply bg-primary text-white font-[poppins];
+}
+.gradient-spin {
+	background-size: 300% 300%;
+	animation: gradient-spin 10s infinite cubic-bezier(0.165, 0.84, 0.44, 1);
+	text-shadow: 1em 1em;
+}
+@keyframes gradient-spin {
+	0% {
+		background-position: 10% 0%;
+	}
+	50% {
+		background-position: 91% 100%;
+	}
+	100% {
+		background-position: 10% 0%;
+	}
+}

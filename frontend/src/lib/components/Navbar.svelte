@@ -13,7 +13,7 @@
 	];
 </script>
 
-<nav class="p-2 bg-black text-white shadow-md">
+<nav class="px-10 py-4 bg-secondary text-white shadow-lg">
 	<ul class="flex items-center justify-between gap-x-3">
 		<li class="grow"><a href="/">Home</a></li>
 		{#each links as link (link.route)}
