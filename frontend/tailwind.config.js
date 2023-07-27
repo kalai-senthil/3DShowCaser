@@ -1,7 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
+  theme: {    
+    clipPath: {
+      mypolygon: "polygon( 0 0 ,100% 0,100% 80%,0 100%)",
+    },
     extend: {
       colors: {
         primary: "#202124",
@@ -12,6 +15,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-clip-path'),
+  ],
 }
 
