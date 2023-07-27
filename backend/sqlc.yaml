@@ -1,0 +1,7 @@
+version: 1
+packages:
+  - path: "internal"
+    name: "database"
+    engine: "mysql"
+    schema: "sql/schemas/"
+    queries: "sql/queries/"
