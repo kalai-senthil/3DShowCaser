@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 
 	database "github.com/3D-ShowCaser/backend/internal"
 	"github.com/google/uuid"
@@ -32,14 +33,24 @@ func (db *DbAPi) RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		params.Password = string(hashedPass)
 	}
 	id := uuid.New()
-	res, err := db.queries.CreateUser(r.Context(), database.CreateUserParams{
-		ID:       []byte(id.String()),
+	_, err = db.queries.CreateUser(r.Context(), database.CreateUserParams{
+		ID:       id.String(),
 		Email:    params.Email,
 		Password: string(hashedPass),
 	})
 	if err != nil {
-		SendErr(w, 400, "Registration Unsuccessful")
+		alreadyRegisterd := strings.Contains(err.Error(), "Duplicate entry")
+		msg := "Registration Unsuccessful"
+		if alreadyRegisterd {
+			msg = "Already Registered"
+		}
+		SendErr(w, 400, msg)
 		return
 	}
-	SendSuccess(w, 201, res)
+	type Data struct {
+		data interface{} `json:"data"`
+	}
+	SendSuccess(w, 201, Data{
+		data: "Registered Successfully",
+	})
 }

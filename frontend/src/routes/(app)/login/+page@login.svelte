@@ -14,11 +14,16 @@
 	$: isRegister = $page.url.searchParams.get('isRegister') === 'true' ?? false;
 	$: mode = isRegister ? 'register' : 'login';
 	$: if (form) {
+		console.log(form);
 		if (form.success) {
 			toastMsg = isRegister ? 'Successfully Registered' : 'Logging you in';
 			form = null;
 			setTimeout(() => {
-				goto('/', { state: { isLoginSuccess: true } });
+				if (isRegister) {
+					goto('/login', { state: { isRegisterSuccess: true } });
+				} else {
+					goto('/', { state: { isLoginSuccess: true } });
+				}
 			}, 1000);
 		} else {
 			toastMsg = form?.message;
@@ -40,7 +45,7 @@
 		<form
 			use:enhance
 			method="post"
-			action={`${isRegister ? '?/login' : '?/register'}`}
+			action={`${isRegister ? '?/register' : '?/login'}`}
 			in:fly={{ y: 10 }}
 			class="shadow bg-secondary px-10 pt-10 pb-5 flex flex-col rounded-lg"
 		>

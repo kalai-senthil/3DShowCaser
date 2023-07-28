@@ -19,7 +19,7 @@ INSERT INTO users (
 `
 
 type CreateUserParams struct {
-	ID       []byte
+	ID       string
 	Email    string
 	Password string
 }
@@ -33,18 +33,18 @@ DELETE FROM users
 WHERE id = ?
 `
 
-func (q *Queries) DeleteUser(ctx context.Context, id []byte) error {
+func (q *Queries) DeleteUser(ctx context.Context, id string) error {
 	_, err := q.db.ExecContext(ctx, deleteUser, id)
 	return err
 }
 
 const getUser = `-- name: GetUser :one
 SELECT id, email, password, registeredat, verfied FROM users
-WHERE id = ? LIMIT 1
+WHERE email = ? LIMIT 1
 `
 
-func (q *Queries) GetUser(ctx context.Context, id []byte) (User, error) {
-	row := q.db.QueryRowContext(ctx, getUser, id)
+func (q *Queries) GetUser(ctx context.Context, email string) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUser, email)
 	var i User
 	err := row.Scan(
 		&i.ID,

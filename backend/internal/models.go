@@ -6,10 +6,17 @@ package database
 
 import (
 	"database/sql"
+	"time"
 )
 
+type Token struct {
+	Token      string
+	Userid     string
+	Expirydate time.Time
+}
+
 type User struct {
-	ID           []byte
+	ID           string
 	Email        string
 	Password     string
 	Registeredat sql.NullTime
