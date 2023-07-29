@@ -41,11 +41,23 @@ func (q *Queries) DeleteToken(ctx context.Context, userid string) error {
 
 const getToken = `-- name: GetToken :one
 SELECT token, userid, expirydate FROM tokens
+WHERE token = ? LIMIT 1
+`
+
+func (q *Queries) GetToken(ctx context.Context, token string) (Token, error) {
+	row := q.db.QueryRowContext(ctx, getToken, token)
+	var i Token
+	err := row.Scan(&i.Token, &i.Userid, &i.Expirydate)
+	return i, err
+}
+
+const getTokenViaEmail = `-- name: GetTokenViaEmail :one
+SELECT token, userid, expirydate FROM tokens
 WHERE userId = (SELECT id FROM users WHERE email = ?) LIMIT 1
 `
 
-func (q *Queries) GetToken(ctx context.Context, email string) (Token, error) {
-	row := q.db.QueryRowContext(ctx, getToken, email)
+func (q *Queries) GetTokenViaEmail(ctx context.Context, email string) (Token, error) {
+	row := q.db.QueryRowContext(ctx, getTokenViaEmail, email)
 	var i Token
 	err := row.Scan(&i.Token, &i.Userid, &i.Expirydate)
 	return i, err

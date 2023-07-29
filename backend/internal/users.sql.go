@@ -55,3 +55,21 @@ func (q *Queries) GetUser(ctx context.Context, email string) (User, error) {
 	)
 	return i, err
 }
+
+const getUserViaId = `-- name: GetUserViaId :one
+SELECT id, email, password, registeredat, verfied FROM users
+WHERE id = ? LIMIT 1
+`
+
+func (q *Queries) GetUserViaId(ctx context.Context, id string) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUserViaId, id)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Email,
+		&i.Password,
+		&i.Registeredat,
+		&i.Verfied,
+	)
+	return i, err
+}

@@ -1,4 +1,4 @@
-import { fail, type Actions, redirect } from '@sveltejs/kit';
+import { fail, type Actions } from '@sveltejs/kit';
 import { BACKEND_URL } from '$env/static/private';
 /** @type {import('./$types').Actions} */
 export const actions: Actions = {

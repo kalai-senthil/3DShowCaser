@@ -14,7 +14,6 @@
 	$: isRegister = $page.url.searchParams.get('isRegister') === 'true' ?? false;
 	$: mode = isRegister ? 'register' : 'login';
 	$: if (form) {
-		console.log(form);
 		if (form.success) {
 			toastMsg = isRegister ? 'Successfully Registered' : 'Logging you in';
 			form = null;

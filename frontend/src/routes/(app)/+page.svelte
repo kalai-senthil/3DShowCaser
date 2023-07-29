@@ -1,5 +1,7 @@
-<script>
+<script lang="ts">
 	import HomeHero from '$lib/components/HomeHero.svelte';
+
+	export let data: import('./$types').PageServerData;
 </script>
 
 <svelte:head>
@@ -8,5 +10,9 @@
 </svelte:head>
 
 <section>
-	<HomeHero />
+	{#if data.profile == null}
+		<HomeHero />
+	{:else}
+		<h1>LOggedf IN</h1>
+	{/if}
 </section>

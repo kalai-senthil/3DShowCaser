@@ -2,6 +2,10 @@
 SELECT * FROM users
 WHERE email = ? LIMIT 1;
 
+-- name: GetUserViaId :one
+SELECT * FROM users
+WHERE id = ? LIMIT 1;
+
 -- name: CreateUser :execresult
 INSERT INTO users (
   id,email,password
