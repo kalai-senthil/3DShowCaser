@@ -20,7 +20,7 @@ func (dBApi *DbAPi) authenticatedMiddleWare(next http.Handler) http.Handler {
 			http.Error(w, "Forbidden", http.StatusForbidden)
 			return
 		}
-		r.Header.Set("user", tokensFromDB.Token)
+		r.Header.Set("user", tokensFromDB.Userid)
 		next.ServeHTTP(w, r)
 	})
 }

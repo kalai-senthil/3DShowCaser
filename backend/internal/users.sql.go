@@ -56,20 +56,43 @@ func (q *Queries) GetUser(ctx context.Context, email string) (User, error) {
 	return i, err
 }
 
-const getUserViaId = `-- name: GetUserViaId :one
-SELECT id, email, password, registeredat, verfied FROM users
-WHERE id = ? LIMIT 1
+const getUserViaId = `-- name: GetUserViaId :many
+SELECT a.id as userId,a.email as email,w.id as fileId,w.name as Name,w.uploadedAt as uploadedAt FROM users a LEFT JOIN works w ON a.id = w.userId WHERE a.id = ?
 `
 
-func (q *Queries) GetUserViaId(ctx context.Context, id string) (User, error) {
-	row := q.db.QueryRowContext(ctx, getUserViaId, id)
-	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Email,
-		&i.Password,
-		&i.Registeredat,
-		&i.Verfied,
-	)
-	return i, err
+type GetUserViaIdRow struct {
+	Userid     string
+	Email      string
+	Fileid     sql.NullString
+	Name       sql.NullString
+	Uploadedat sql.NullTime
+}
+
+func (q *Queries) GetUserViaId(ctx context.Context, id string) ([]GetUserViaIdRow, error) {
+	rows, err := q.db.QueryContext(ctx, getUserViaId, id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []GetUserViaIdRow
+	for rows.Next() {
+		var i GetUserViaIdRow
+		if err := rows.Scan(
+			&i.Userid,
+			&i.Email,
+			&i.Fileid,
+			&i.Name,
+			&i.Uploadedat,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
 }

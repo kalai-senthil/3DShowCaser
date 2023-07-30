@@ -21,6 +21,7 @@ export const actions: Actions = {
 				success: boolean;
 				data: { access_token: string; message?: string };
 			};
+
 			if (data.success) {
 				event.cookies.set('access_token', data.data.access_token);
 			}

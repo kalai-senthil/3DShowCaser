@@ -1,6 +1,7 @@
 <script lang="ts">
+	import Contributions from '$lib/components/Contributions.svelte';
 	import HomeHero from '$lib/components/HomeHero.svelte';
-
+	import Profile from '$lib/components/Profile.svelte';
 	export let data: import('./$types').PageServerData;
 </script>
 
@@ -8,11 +9,13 @@
 	<title>Home</title>
 	<meta name="description" content="3D Show Caser" />
 </svelte:head>
-
-<section>
-	{#if data.profile == null}
+{#if data.profile == null}
+	<section>
 		<HomeHero />
-	{:else}
-		<h1>LOggedf IN</h1>
-	{/if}
-</section>
+	</section>
+{:else}
+	<section class="page">
+		<Profile user={data.profile} />
+		<Contributions works={data.profile.works} />
+	</section>
+{/if}

@@ -22,3 +22,11 @@ type User struct {
 	Registeredat sql.NullTime
 	Verfied      bool
 }
+
+type Work struct {
+	ID         string
+	Userid     string
+	Name       string
+	File       []byte
+	Uploadedat time.Time
+}
