@@ -6,5 +6,5 @@
 </script>
 
 <section class="overflow-hidden">
-	<Viewer data={data.artData} />
+	<Viewer data={data.artData} token={data.token} />
 </section>

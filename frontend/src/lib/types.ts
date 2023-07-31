@@ -7,5 +7,5 @@ export type Work = {
 	id: string;
 	name: string;
 	uploadedAt: string;
-	file?: string;
+	path: string;
 };

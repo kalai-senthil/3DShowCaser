@@ -27,6 +27,6 @@ type Work struct {
 	ID         string
 	Userid     string
 	Name       string
-	File       []byte
+	Path       string
 	Uploadedat time.Time
 }

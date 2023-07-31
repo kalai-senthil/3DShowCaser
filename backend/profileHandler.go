@@ -9,7 +9,7 @@ type Work_M struct {
 	Id         string    `json:"id"`
 	Name       string    `json:"name"`
 	UploadedAt time.Time `json:"uploadedAt"`
-	File       []byte    `json:"file"`
+	Path       string    `json:"path"`
 }
 type User_M struct {
 	Email  string   `json:"email"`

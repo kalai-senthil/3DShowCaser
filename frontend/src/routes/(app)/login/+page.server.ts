@@ -23,7 +23,7 @@ export const actions: Actions = {
 			};
 
 			if (data.success) {
-				event.cookies.set('access_token', data.data.access_token);
+				event.cookies.set('Authorization', data.data.access_token);
 			}
 			return data;
 		} catch (error) {

@@ -4,7 +4,7 @@ WHERE id = ? LIMIT 1;
 
 -- name: UploadWork :execresult
 INSERT INTO works (
-  id,userId,name,file,uploadedAt
+  id,userId,name,path,uploadedAt
 ) VALUES (
   ?,?,?,?,?
 );

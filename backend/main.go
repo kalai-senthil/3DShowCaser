@@ -45,8 +45,9 @@ func main() {
 	router.HandleFunc("/", homeHandler)
 	router.Handle("/auth", GetAuthRouter(router, &db))
 	router.Use(db.authenticatedMiddleWare)
+	router.PathPrefix("/works/").Handler(http.StripPrefix("/works/", http.FileServer(http.Dir(os.Getenv("worksUploadDir"))))).Methods(http.MethodGet)
 	router.HandleFunc("/profile", ProfileHandler)
 	router.HandleFunc("/upload", UploadHandler)
-	router.HandleFunc("/art/{artId}", artGetHandler)
+	router.HandleFunc("/art/{artId}", workGetHandler)
 	http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), router)
 }

@@ -5,7 +5,7 @@ export async function getProfile(token: string) {
 		const req = await fetch(`${BACKEND_URL}/profile`, {
 			method: 'POST',
 			headers: {
-				access_token: token
+				Authorization: token
 			}
 		});
 		const data = await req.json();
@@ -19,7 +19,7 @@ export async function getArt(token: string, id: string) {
 	try {
 		const req = await fetch(`${BACKEND_URL}/art/${id}`, {
 			headers: {
-				access_token: token
+				Authorization: token
 			}
 		});
 		const data = await req.json();
