@@ -2,11 +2,18 @@
 	import { onMount } from 'svelte';
 	import { PUBLIC_BACKEND_URL } from '$env/static/public';
 	export let data: Work | null;
+	import px from '$lib/images/textures/px.png';
+	import py from '$lib/images/textures/py.png';
+	import pz from '$lib/images/textures/pz.png';
+	import nz from '$lib/images/textures/nz.png';
+	import nx from '$lib/images/textures/nx.png';
+	import ny from '$lib/images/textures/ny.png';
 	export let token: string;
 	import {
 		AmbientLight,
 		BoxGeometry,
 		Color,
+		CubeTextureLoader,
 		DoubleSide,
 		LoadingManager,
 		Mesh,
@@ -24,12 +31,17 @@
 	const camera = new PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 	const scene = new Scene();
 	const loader = new GLTFLoader(new LoadingManager());
-	const material = new MeshStandardMaterial({});
 	const light = new AmbientLight(new Color('white'));
+	light.intensity = 10;
+	const textureLoader = new CubeTextureLoader();
+	loader.setPath('textures/cube/pisa/');
+	const textureCube = textureLoader.load([px, nx, py, ny, pz, nz]);
+	const material = new MeshBasicMaterial({ envMap: textureCube });
 	const geometry = new BoxGeometry(1, 1, 1);
 	const mesh = new Mesh(geometry, material);
-
 	onMount(() => {
+		scene.add(mesh);
+		// scene.background = textureCube;
 		loader.setWithCredentials(true);
 		loader.load(`${PUBLIC_BACKEND_URL}/${data?.path}`, (gltf) => {
 			gltf.scene.traverse(function (node) {
