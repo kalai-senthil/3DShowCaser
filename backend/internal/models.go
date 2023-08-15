@@ -24,9 +24,11 @@ type User struct {
 }
 
 type Work struct {
-	ID         string
-	Userid     string
-	Name       string
-	Path       string
-	Uploadedat time.Time
+	ID          string
+	Userid      string
+	Name        string
+	Description sql.NullString
+	Tags        string
+	Path        string
+	Uploadedat  time.Time
 }

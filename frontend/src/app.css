@@ -9,8 +9,12 @@
 	.svg-img {
 		@apply h-5;
 	}
-	input {
+	input,
+	textarea {
 		@apply p-2 border-[.5px] bg-transparent focus:outline-none focus:border-gray-400 my-3 rounded-md bg-secondary focus:bg-transparent;
+	}
+	textarea {
+		resize: none;
 	}
 }
 body {

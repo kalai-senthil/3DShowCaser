@@ -36,12 +36,9 @@
 	const textureLoader = new CubeTextureLoader();
 	loader.setPath('textures/cube/pisa/');
 	const textureCube = textureLoader.load([px, nx, py, ny, pz, nz]);
-	const material = new MeshBasicMaterial({ envMap: textureCube });
-	const geometry = new BoxGeometry(1, 1, 1);
-	const mesh = new Mesh(geometry, material);
 	onMount(() => {
-		scene.add(mesh);
-		// scene.background = textureCube;
+		scene.background = textureCube;
+		loader.setPath('');
 		loader.setWithCredentials(true);
 		loader.load(`${PUBLIC_BACKEND_URL}/${data?.path}`, (gltf) => {
 			gltf.scene.traverse(function (node) {
@@ -66,7 +63,6 @@
 			});
 		}
 		renderer.setSize(window.innerWidth, window.innerHeight);
-		// scene.add(mesh);
 		scene.add(light);
 		camera.position.z = 5;
 		scene.add(camera);

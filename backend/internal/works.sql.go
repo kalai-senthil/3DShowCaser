@@ -22,7 +22,7 @@ func (q *Queries) DeleteWork(ctx context.Context, id string) error {
 }
 
 const getWork = `-- name: GetWork :one
-SELECT id, userid, name, path, uploadedat FROM works
+SELECT id, userid, name, description, tags, path, uploadedat FROM works
 WHERE id = ? LIMIT 1
 `
 
@@ -33,6 +33,8 @@ func (q *Queries) GetWork(ctx context.Context, id string) (Work, error) {
 		&i.ID,
 		&i.Userid,
 		&i.Name,
+		&i.Description,
+		&i.Tags,
 		&i.Path,
 		&i.Uploadedat,
 	)
@@ -41,18 +43,20 @@ func (q *Queries) GetWork(ctx context.Context, id string) (Work, error) {
 
 const uploadWork = `-- name: UploadWork :execresult
 INSERT INTO works (
-  id,userId,name,path,uploadedAt
+  id,userId,name,description,tags,path,uploadedAt
 ) VALUES (
-  ?,?,?,?,?
+  ?,?,?,?,?,?,?
 )
 `
 
 type UploadWorkParams struct {
-	ID         string
-	Userid     string
-	Name       string
-	Path       string
-	Uploadedat time.Time
+	ID          string
+	Userid      string
+	Name        string
+	Description sql.NullString
+	Tags        string
+	Path        string
+	Uploadedat  time.Time
 }
 
 func (q *Queries) UploadWork(ctx context.Context, arg UploadWorkParams) (sql.Result, error) {
@@ -60,6 +64,8 @@ func (q *Queries) UploadWork(ctx context.Context, arg UploadWorkParams) (sql.Res
 		arg.ID,
 		arg.Userid,
 		arg.Name,
+		arg.Description,
+		arg.Tags,
 		arg.Path,
 		arg.Uploadedat,
 	)

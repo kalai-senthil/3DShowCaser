@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Contributions from '$lib/components/Contributions.svelte';
+	import Contributions from '$lib/components/Works.svelte';
 	import HomeHero from '$lib/components/HomeHero.svelte';
 	import Profile from '$lib/components/Profile.svelte';
 	export let data: import('./$types').PageServerData;
