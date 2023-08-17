@@ -24,9 +24,9 @@ func UploadHandler(w http.ResponseWriter, r *http.Request) {
 		Tags        string `json:"tags"`
 	}
 	args := params{}
+	fmt.Println(r.Body)
 	err := json.NewDecoder(r.Body).Decode(&args)
 	if err != nil {
-		fmt.Println(err)
 		SendErr(w, http.StatusBadRequest, "Check Msg Properly")
 		return
 	}

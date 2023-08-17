@@ -1,0 +1,3 @@
+mysql-workbench &
+nodemon --exec "pkill -9 backend" &
+nodemon --exec "go build && ./backend"

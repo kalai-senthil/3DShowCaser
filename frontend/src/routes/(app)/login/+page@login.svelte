@@ -49,7 +49,13 @@
 			class="shadow bg-secondary px-10 pt-10 pb-5 flex flex-col rounded-lg"
 		>
 			<input disabled={form?.success} name="email" placeholder="Email" type="email" />
-			<input disabled={form?.success} name="password" type="password" placeholder="Password" />
+			<input
+				disabled={form?.success}
+				name="password"
+				autocomplete="new-password"
+				type="password"
+				placeholder="Password"
+			/>
 			<div class="self-end my-2">
 				{#if form?.success}
 					<Loading />
