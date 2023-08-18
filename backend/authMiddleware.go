@@ -17,9 +17,9 @@ func (dBApi *DbAPi) authenticatedMiddleWare(next http.Handler) http.Handler {
 		w.Header().Add("Origin", os.Getenv("FRONTEND_URL"))
 		token := r.Header.Get("Authorization")
 		if token == "" {
-			cookie, err := r.Cookie("access_token")
+			cookie, err := r.Cookie("Authorization")
 			if err != nil {
-				cookie, err = r.Cookie("Authorization")
+				cookie, err = r.Cookie("access_token")
 				if err != nil {
 					http.Error(w, "Forbidden", http.StatusForbidden)
 					return

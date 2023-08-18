@@ -36,6 +36,7 @@
 		method="post"
 		class="grid grid-cols-2 gap-5 mx-10 place-content-end"
 		use:enhance
+		enctype="multipart/form-data"
 		action="?/addArtWork"
 	>
 		<section class="flex flex-col">
@@ -45,9 +46,9 @@
 		</section>
 		<section class="flex flex-col">
 			<label for="images">Images</label>
-			<input name="images" type="file" accept="image/jpg" />
+			<input name="image" type="file" accept="image/jpg" />
 			<label for="art">Art</label>
-			<input name="art" type="file" />
+			<input name="art" type="file" accept="*/glb,gltf" />
 		</section>
 		<div class="flex justify-end">
 			<PrimaryBtn type="submit">Submit</PrimaryBtn>

@@ -8,4 +8,5 @@ export type Work = {
 	name: string;
 	uploadedAt: string;
 	path: string;
+	image: string;
 };

@@ -57,7 +57,7 @@ func (q *Queries) GetUser(ctx context.Context, email string) (User, error) {
 }
 
 const getUserViaId = `-- name: GetUserViaId :many
-SELECT a.id as userId,a.email as email,w.id as fileId,w.name as Name,w.uploadedAt as uploadedAt FROM users a LEFT JOIN works w ON a.id = w.userId WHERE a.id = ?
+SELECT a.id as userId,a.email as email,w.id as fileId,w.name as Name,w.uploadedAt as uploadedAt,w.path as path,w.image as image FROM users a LEFT JOIN works w ON a.id = w.userId WHERE a.id = ?
 `
 
 type GetUserViaIdRow struct {
@@ -66,6 +66,8 @@ type GetUserViaIdRow struct {
 	Fileid     sql.NullString
 	Name       sql.NullString
 	Uploadedat sql.NullTime
+	Path       sql.NullString
+	Image      sql.NullString
 }
 
 func (q *Queries) GetUserViaId(ctx context.Context, id string) ([]GetUserViaIdRow, error) {
@@ -83,6 +85,8 @@ func (q *Queries) GetUserViaId(ctx context.Context, id string) ([]GetUserViaIdRo
 			&i.Fileid,
 			&i.Name,
 			&i.Uploadedat,
+			&i.Path,
+			&i.Image,
 		); err != nil {
 			return nil, err
 		}

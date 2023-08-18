@@ -10,6 +10,7 @@ type Work_M struct {
 	Name       string    `json:"name"`
 	UploadedAt time.Time `json:"uploadedAt"`
 	Path       string    `json:"path"`
+	Image      string    `json:"image"`
 }
 type User_M struct {
 	Email  string   `json:"email"`
@@ -40,6 +41,8 @@ func ProfileHandler(w http.ResponseWriter, r *http.Request) {
 				Name:       row.Name.String,
 				Id:         row.Fileid.String,
 				UploadedAt: row.Uploadedat.Time,
+				Path:       row.Path.String,
+				Image:      row.Image.String,
 			})
 		}
 	}

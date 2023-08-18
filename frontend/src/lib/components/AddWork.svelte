@@ -3,7 +3,7 @@
 </script>
 
 <section
-	class="col-span-12 md:col-span-3 rounded-md border-[.5px] border-gray-500 py-5 cursor-pointer hover:bg-gray-700/50 transition-colors"
+	class="flex justify-center items-center col-span-12 md:col-span-3 rounded-md border-[.5px] border-gray-500 py-5 cursor-pointer hover:bg-gray-700/50 transition-colors"
 >
 	<a class="justify-center flex-col items-center flex" href="/add">
 		<img src={addIcon} alt="add" class="h-20" />

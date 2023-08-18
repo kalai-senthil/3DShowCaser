@@ -30,5 +30,6 @@ type Work struct {
 	Description sql.NullString
 	Tags        string
 	Path        string
+	Image       string
 	Uploadedat  time.Time
 }
